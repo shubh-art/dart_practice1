@@ -1,3 +1,5 @@
+//Implement an abstract class Shape with a method area() and extend it to Circle and Rectangle. Calculate the area for both.
+
 import 'dart:math';
 
 abstract class Shapes {

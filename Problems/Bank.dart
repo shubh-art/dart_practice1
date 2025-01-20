@@ -1,3 +1,4 @@
+//Create a class BankAccount with methods to deposit, withdraw, and check balance. Handle invalid operations like overdrawing using exceptions.
 void main(){
   var obj1 = Bank();
   obj1.deposit(1000);

@@ -1,3 +1,5 @@
+//Create a stream that emits random numbers every second for 5 seconds.
+
 import 'dart:math';
 
 void main()async{

@@ -1,3 +1,5 @@
+//Create a program that accepts a user’s name and age, then prints whether they are eligible to vote (age >= 18).
+
 import 'dart:io';
 void main()
 {
