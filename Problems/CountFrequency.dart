@@ -14,7 +14,7 @@ void main()
     {
       map[char] = map[char]! + 1;
     }
-    else if( char == " " ){
+    else if( char == " " ){ // To Skip spaces
       continue;
     }
     else
