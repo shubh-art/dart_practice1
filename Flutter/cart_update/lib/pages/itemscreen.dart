@@ -2,6 +2,7 @@ import 'package:cart/services/cart.dart';
 import 'package:cart/services/item.dart';
 import 'package:flutter/material.dart';
 import 'package:cart/pages/checkoutscreen.dart';
+import 'package:provider/provider.dart';
 
 class ItemScreen extends StatefulWidget
 {
@@ -27,7 +28,7 @@ class _ItemScreenState extends State<ItemScreen>
   @override
   Widget build(BuildContext context)
   {
-    Cart cart = Cart.of(context);
+    // Cart cart = Cart.of(context);
     return Scaffold(
       appBar: AppBar(title: Text('Items'),),
       body: ListView.builder(
@@ -40,13 +41,13 @@ class _ItemScreenState extends State<ItemScreen>
               subtitle: Text('\$${cartItems[index].price}'),
               leading: IconButton(onPressed: () {
                 setState(() {
-                  cart.cart.add(cartItems[index]);
+                  Provider.of<Cart>(context,listen : false).add(cartItems[index]);
                 });
               }, icon: Icon(Icons.shopping_cart_checkout),
               ),
               trailing: IconButton(onPressed: (){
                // cartItems[index].quantity++;
-                cart.cart.add(cartItems[index]);
+                Provider.of<Cart>(context , listen : false).add(cartItems[index]);
               },
               icon: Icon(Icons.add),
               ),
@@ -58,7 +59,7 @@ class _ItemScreenState extends State<ItemScreen>
           FloatingActionButton(onPressed:() async{
             final result = await Navigator.pushReplacement(context,MaterialPageRoute(builder: (context) => CheckOutScreen()));
             if( result != null ) {
-              Navigator.of(context).pop(true);
+              Navigator.pop(context,true);
             }
           
             },

@@ -1,6 +1,7 @@
 import 'package:cart/services/cart.dart';
 import 'package:flutter/material.dart';
 import 'package:cart/pages/itemscreen.dart';
+import 'package:provider/provider.dart';
 
 class MyHomePage extends StatefulWidget{
   const MyHomePage({super.key});
@@ -13,7 +14,7 @@ class _MyHomePage extends State<MyHomePage>{
   @override
   Widget build(BuildContext context)
   {
-    late int _total;
+    int _total = 0;
     return Scaffold(
       appBar: 
       AppBar(
@@ -21,7 +22,7 @@ class _MyHomePage extends State<MyHomePage>{
         backgroundColor: Colors.blue,
         centerTitle : true
         ),
-        body: consumer<Cart>(
+        body: Consumer<Cart>(
           builder: (context,cart,child) {
             int total = cart.total;
             _total = total;
@@ -38,10 +39,7 @@ class _MyHomePage extends State<MyHomePage>{
             );
           },
         ),
-      floatingActionButton: Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: [
-          FloatingActionButton(onPressed: (){setState((){});},child: Icon(Icons.restart_alt),),
-
+      floatingActionButton:
           FloatingActionButton(onPressed: ()async{
             final result =await Navigator.push(context,
                 MaterialPageRoute(builder: (context) => ItemScreen()));
@@ -55,9 +53,9 @@ class _MyHomePage extends State<MyHomePage>{
             tooltip: 'Add Items',
             child: Icon(Icons.shopping_cart),
           ),
-        ],
-      ),
-      bottomSheet: Text(' Total = ${total}',style: TextStyle(fontSize: 20),),
+  
+      
+      bottomSheet: Text(' Total = ${_total}',style: TextStyle(fontSize: 20),),
     );
   }
 }
