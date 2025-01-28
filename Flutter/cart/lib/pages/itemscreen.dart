@@ -56,7 +56,7 @@ class _ItemScreenState extends State<ItemScreen>
       ),
       floatingActionButton:
           FloatingActionButton(onPressed:() async{
-            final result = await Navigator.pushReplacement(context,MaterialPageRoute(builder: (context) => CheckOutScreen()));
+            final result = await Navigator.push(context,MaterialPageRoute(builder: (context) => CheckOutScreen()));
             if( result != null ) {
               Navigator.of(context).pop(true);
             }
