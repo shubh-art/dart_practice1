@@ -41,13 +41,13 @@ class _ItemScreenState extends State<ItemScreen>
               subtitle: Text('\$${cartItems[index].price}'),
               leading: IconButton(onPressed: () {
                 setState(() {
-                  Provider.of<Cart>(context,listen : false).add(cartItems[index]);
+                  Provider.of<Cart>(context,listen: false).add(cartItems[index]);
                 });
               }, icon: Icon(Icons.shopping_cart_checkout),
               ),
               trailing: IconButton(onPressed: (){
                // cartItems[index].quantity++;
-                Provider.of<Cart>(context , listen : false).add(cartItems[index]);
+                Provider.of<Cart>(context,listen: false).add(cartItems[index]);
               },
               icon: Icon(Icons.add),
               ),
@@ -57,7 +57,7 @@ class _ItemScreenState extends State<ItemScreen>
       ),
       floatingActionButton:
           FloatingActionButton(onPressed:() async{
-            final result = await Navigator.pushReplacement(context,MaterialPageRoute(builder: (context) => CheckOutScreen()));
+            final result = await Navigator.push(context,MaterialPageRoute(builder: (context) => CheckOutScreen()));
             if( result != null ) {
               Navigator.pop(context,true);
             }
