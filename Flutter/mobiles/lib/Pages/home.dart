@@ -30,7 +30,7 @@ class _MyHomePageState extends State<MyHomePage> {
         builder: (context,provider,child) {
           final datalist = provider.list;
           if( datalist.isEmpty ){
-            return Center(child: SpinKitPouringHourGlass(color: Colors.red,duration: Duration(seconds: 5),));
+            return Center(child: SpinKitPouringHourGlass(color: Colors.red,));
           }
           return ListView.builder(
             itemCount: datalist.length,
@@ -44,7 +44,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: data.data.entries.map<Widget>((entry){ 
                         return Padding(
-                          padding: const EdgeInsets.all(8.0),
+                          padding: const EdgeInsets.all(2.0),
                           child: Text(' ${entry.key} : ${entry.value} '),
                         );
                         }
@@ -57,7 +57,14 @@ class _MyHomePageState extends State<MyHomePage> {
           );
         }
       ),
-      floatingActionButton: FloatingActionButton(onPressed: ()=> Navigator.push(context, MaterialPageRoute(builder: (context) => Edit()))),
+      floatingActionButton: FloatingActionButton(
+        onPressed: ()=> Navigator.push(
+          context, MaterialPageRoute(
+            builder: (context) => Edit()
+            )
+            ),
+            child: Icon(Icons.navigate_next),
+      ),
     );
   }
 }
