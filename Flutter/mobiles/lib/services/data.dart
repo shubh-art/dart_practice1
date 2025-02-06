@@ -99,9 +99,7 @@ try{
   Future<void> edit(var id , Map<String , dynamic> patchData)
   async{
 
-    final url = Uri.parse('https://api.restful-api.dev/objects/$id');
-
-try{    final response = await http.patch(url,
+try{    final response = await http.patch(_getUrl(id),
   headers: {"Content-Type" : "application/json"},
   body: jsonEncode(patchData));
 
