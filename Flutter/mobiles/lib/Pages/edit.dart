@@ -47,7 +47,7 @@ class _EditState extends State<Edit>{
                 Navigator.pop(context);
                 _showAddKeyValueDialog(main_data);
               },
-              child: Text("Add New Key"),
+              child: Text("Add New Specs"),
             ),
             TextButton(
               onPressed: () => Navigator.pop(context),
@@ -74,7 +74,11 @@ class _EditState extends State<Edit>{
           ),
           actions: [
             TextButton(
-              onPressed: () => Navigator.pop(context),
+              onPressed: (){ Navigator.pop(context);
+              controller.clear();
+              }
+,
+
               child: Text("Cancel"),
             ),
             TextButton(
@@ -83,6 +87,7 @@ class _EditState extends State<Edit>{
                 print("Updated $key to ${controller.text}");
                 data.data[key] = controller.text;
                 Provider.of<DataProvider>(context,listen: false).edit(data.id ,{key : controller.text});
+                controller.clear();
                 Navigator.pop(context);
               },
               child: Text("Save"),
@@ -127,6 +132,8 @@ class _EditState extends State<Edit>{
                 print("Added ${keyController.text} : ${valueController.text}");
                 data.data[keyController.text] = valueController.text;
                 Provider.of<DataProvider>(context,listen: false).update(data.id,data);
+                valueController.clear();
+                keyController.clear();
                 Navigator.pop(context);
               },
               child: Text("Add"),
@@ -136,6 +143,63 @@ class _EditState extends State<Edit>{
       },
     );
   }
+
+void _showAddNewDataDialog() {
+  TextEditingController nameController = TextEditingController();
+  TextEditingController dataController = TextEditingController();
+
+  showDialog(
+    context: context,
+    builder: (context) {
+      return AlertDialog(
+        title: Text("Add New Data"),
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            TextField(
+              controller: nameController,
+              decoration: InputDecoration(labelText: "Name"),
+            ),
+            TextField(
+              controller: dataController,
+              decoration: InputDecoration(labelText: "Data"),
+            ),
+          ],
+        ),
+        actions: [
+          TextButton(
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            child: Text("Cancel"),
+          ),
+          TextButton(
+            onPressed: () {
+              if (nameController.text.isNotEmpty && dataController.text.isNotEmpty) {
+                // Create a new Data object
+                Data newData = Data(
+                  id: '', // ID will be assigned by the API
+                  name: nameController.text,
+                  data: { "spec": dataController.text },
+                );
+               
+                Provider.of<DataProvider>(context, listen: false).addNew(newData);
+
+                nameController.clear();
+                dataController.clear();
+                Navigator.pop(context);
+              } else {
+
+                ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Please fill in both fields')));
+              }
+            },
+            child: Text("Add"),
+          ),
+        ],
+      );
+    },
+  );
+}
 
 
   @override
@@ -197,7 +261,8 @@ class _EditState extends State<Edit>{
           }
           );
         }
-      )
+      ),
+      floatingActionButton: FloatingActionButton(onPressed: (){_showAddNewDataDialog();},child: Icon(Icons.add),),
     );
   }
 }

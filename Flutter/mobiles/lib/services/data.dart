@@ -44,6 +44,7 @@ class DataProvider extends ChangeNotifier{
       List<dynamic> data_list = jsonDecode(response.body);
       _list = data_list.map<Data>((data) => Data.fromJson(data)).toList();
       notifyListeners();
+      print('Load Sucessfully');
     }
     else
     print('fail to load');
@@ -75,8 +76,10 @@ try{
 
 
   Future<void> addNew( Data data )async{
+    print('${data}');
   try{
     final response =await http.post(_BASE_URL,
+    headers: {"Content-Type" : "application/json"},
   body: jsonEncode(data.toJson()));
   if(response.statusCode == 200)
   {
@@ -96,10 +99,14 @@ try{
   Future<void> edit(var id , Map<String , dynamic> patchData)
   async{
 
-try{    final response = await http.patch(
-  _getUrl(id),
+    final url = Uri.parse('https://api.restful-api.dev/objects/$id');
+
+try{    final response = await http.patch(url,
   headers: {"Content-Type" : "application/json"},
   body: jsonEncode(patchData));
+
+      print('Response Status: ${response.statusCode}');
+    print('Response Body: ${response.body}');
 
     if( response.statusCode == 200 )
     {
@@ -118,7 +125,7 @@ try{    final response = await http.patch(
 
   Future<void> update(var id , Data data)
   async{
-
+  
     try{
       final response = await http.put(
         _getUrl(id),

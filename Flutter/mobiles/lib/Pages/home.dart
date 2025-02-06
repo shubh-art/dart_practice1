@@ -38,7 +38,9 @@ class _MyHomePageState extends State<MyHomePage> {
                 final data = datalist[index];
                 return Card(
                   child: ListTile(
-                    title: Text(data.name),
+                    title: Text(data.name,style: TextStyle(
+                      fontWeight:FontWeight.bold,
+                    ),),
                     subtitle:
                       data.data != null ? Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
