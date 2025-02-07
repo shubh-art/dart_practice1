@@ -13,11 +13,11 @@ class CircularAvatars extends StatefulWidget {
 }
 
 class _CircularAvatarsState extends State<CircularAvatars> {
-  final double radius = 100;
+  final double radius = 150;
   double centerX = 200, centerY = 200;
   double baseAngle = 0;
-  List<File?> images = List.filled(5, null);
-  double sensitivityFactor = 0.005;
+  List<File?> images = List.filled(12, null);
+  double sensitivityFactor = 0.5;
   Offset? lastPosition;
 
   void pickImage(int index) async {
@@ -46,11 +46,15 @@ class _CircularAvatarsState extends State<CircularAvatars> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Draggable Circular Avatars")),
+      appBar: AppBar(
+          title:Text("Draggable Circular Avatars",style: TextStyle(color: Colors.white),),
+      centerTitle: true,
+      backgroundColor: Colors.blue[900],
+      ),
       body: Center(
         child: Stack(
-          children: List.generate(5, (index) {
-            double angle = (index * 2 * pi / 5) + baseAngle;
+          children: List.generate(12, (index) {
+            double angle = (index * 2 * pi / 12) + baseAngle;
             double x = centerX + radius * cos(angle);
             double y = centerY + radius * sin(angle);
 
