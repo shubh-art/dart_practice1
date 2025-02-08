@@ -54,38 +54,39 @@ class _CircularAvatarsState extends State<CircularAvatars> {
         centerTitle: true,
         backgroundColor: Colors.blue[900],
       ),
-      body: GestureDetector(
-        onPanStart: (details) {
-          lastPosition = details.globalPosition;
-        },
-        onPanUpdate: updateRotation,
-        onPanEnd: (_) {
-          lastPosition = null;
-        },
-        child: Center(
-          child: Stack(
-            children: List.generate(12, (index) {
-              double angle = (index * 2 * pi / 12) + baseAngle;
-              double x = centerX + radius * cos(angle);
-              double y = centerY + radius * sin(angle);
-
-              return Positioned(
-                left: x - 30, // Adjust to center avatars properly
-                top: y - 30,
-                child: GestureDetector(
-                  onTap: () => pickImage(index),
-                  child: CircleAvatar(
-                    radius: 30,
-                    backgroundImage: images[index] != null ? FileImage(images[index]!) : AssetImage(defaultImages[index]) as ImageProvider,
-                    // child: images[index] == null ? Icon(Icons.add_a_photo, color: Colors.white) : null,
-                  ),
+      body: 
+          GestureDetector(
+            onPanStart: (details) {
+              lastPosition = details.globalPosition;
+            },
+            onPanUpdate: updateRotation,
+            onPanEnd: (_) {
+              lastPosition = null;
+            },
+            child: Center(
+              child: Stack(
+                children: List.generate(12, (index) {
+                  double angle = (index * 2 * pi / 12) + baseAngle;
+                  double x = centerX + radius * cos(angle);
+                  double y = centerY + radius * sin(angle);
+          
+                  return Positioned(
+                    left: x - 30, // Adjust to center avatars properly
+                    top: y - 30,
+                    child: GestureDetector(
+                      onTap: () => pickImage(index),
+                      child: CircleAvatar(
+                        radius: 30,
+                        backgroundImage: images[index] != null ? FileImage(images[index]!) : AssetImage(defaultImages[index]) as ImageProvider,
+                        // child: images[index] == null ? Icon(Icons.add_a_photo, color: Colors.white) : null,
+                      ),
+                    ),
+                  );
+                }
                 ),
-              );
-            }
+              ),
             ),
           ),
-        ),
-      ),
     );
   }
 }
