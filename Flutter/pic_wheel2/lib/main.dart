@@ -8,8 +8,9 @@ void main() {
 }
 
 class CircularAvatars extends StatefulWidget {
+  const CircularAvatars({super.key});
   @override
-  _CircularAvatarsState createState() => _CircularAvatarsState();
+  State<CircularAvatars> createState() => _CircularAvatarsState();
 }
 
 class _CircularAvatarsState extends State<CircularAvatars> {
@@ -17,7 +18,7 @@ class _CircularAvatarsState extends State<CircularAvatars> {
   double centerX = 200, centerY = 300;
   double baseAngle = 0;
   List<File?> images = List.filled(12, null);
-  double sensitivityFactor = 0.5; // Adjusted for smoother rotation
+  double sensitivityFactor = 1.0; // Adjusted for smoother rotation
   double lastAngle = 0.0; // Store last angle for smooth transition
   Offset? lastPosition;
   List<String> defaultImages = List.generate(12, (index) => "assets/image.png");
