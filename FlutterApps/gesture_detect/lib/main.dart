@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 
 void main() => runApp(const MyApp());
@@ -14,9 +16,9 @@ class MyApp extends StatelessWidget{
 
 class Gesturedetector extends StatelessWidget{
   @override
-  var _top = 0;
-  var _left = 0;
-  
+  var _top = 0.0;
+  var _left = 0.0;
+
   Widget build(BuildContext context){
     return Scaffold(
       // appBar: AppBar(
@@ -27,7 +29,12 @@ class Gesturedetector extends StatelessWidget{
       body:Positioned(
         top:_top,
         left: _left,
-        child: GestureDetector()),
+        child: GestureDetector(
+          onPanUpdate: (details) {
+            _top = max(0, _top+details.delta.dy);
+            _left = max(0, _left + details.delta.dx);
+          },
+        )),
     );
   }
 }
